@@ -1,0 +1,3 @@
+--disable trailingCommas
+--disable wrapMultilineStatementBraces
+--wraparguments before-first

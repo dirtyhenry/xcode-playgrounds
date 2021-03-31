@@ -5,7 +5,20 @@ import JavaScriptCore
 
 /*:
 
- ## A class and some extensions to decode & encode JSON dates
+ ## A Swift class and convenient extensions to manage dates in JSON API
+
+ As of today, here are the options for the enum
+ [`JSONDecoder.DateDecodingStrategy`][7] that `JSONDecoder` can use:
+
+ 1. `deferredToDate`: the default using a `TimeInterval` (ie an alias to
+    `Double`) that is not human-readable;
+ 2. `iso8601`: this option is using ISO 8601 without fractional seconds, which is
+    against the usage and JavaScript's spec;
+ 3. `formatted(DateFormatter)`: never use this since you might — for instance —
+    break for users with a 12-hour AM/PM time formatting, which is a lesson I
+    learned the hard way[^2];
+ 4. `custom((Decoder) -> Date)`: 🎉 this is the option we want and here is the
+    version I suggest 👇.
 
  */
 
@@ -90,7 +103,8 @@ struct PayloadStruct: Codable {
     let creationDate: Date
 }
 
-let payload = try jsonPayload?.toString()?.data(using: .utf8).map { try JSONDecoder.javaScriptISO8601().decode(PayloadStruct.self, from: $0)
+let payload = try jsonPayload?.toString()?.data(using: .utf8).map {
+    try JSONDecoder.javaScriptISO8601().decode(PayloadStruct.self, from: $0)
 }
 
 let reencodedJSONPayload = (try? JSONEncoder.javaScriptISO8601().encode(payload)).flatMap {
@@ -99,11 +113,4 @@ let reencodedJSONPayload = (try? JSONEncoder.javaScriptISO8601().encode(payload)
 
 assert(jsonPayload?.toString() == reencodedJSONPayload)
 
-//: [Next](@next)
-
-let date = Date()
-let encoded = (try? JSONEncoder().encode(date)).flatMap {
-    String(data: $0, encoding: .utf8)
-}
-
-let now = Date(timeIntervalSinceReferenceDate: 638_832_175.28592002)
+//: [Previous](@previous)

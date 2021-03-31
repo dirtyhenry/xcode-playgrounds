@@ -6,7 +6,7 @@ import JavaScriptCore
 
 /*:
 
- # Decoding Dates from JSON APIs in Swift the Right Way
+ # How I Decode Dates from JSON APIs in Swift
 
  ## The Problem with `Codable`'s JSON Support
 

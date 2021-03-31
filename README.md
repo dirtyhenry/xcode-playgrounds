@@ -4,7 +4,7 @@ This repository contains a collection of Xcode playgrounds that I used to write 
 
 ## 🧑‍🍳 On the menu today
 
-- [📜][4] [Decoding Dates from JSON APIs in Swift the Right Way](JSON-date.playground)
+- [📜][4] [How I Decode Dates from JSON APIs in Swift](JSON-date.playground)
 - [📜][3] [Pixel Perfect Line Height With UIKit](line-height.playground)
 - [📜][2] [Activating OpenType Features in iOS](activating-opentype-features.playground)
 

@@ -60,7 +60,7 @@ class LineHeightedLabel: UIView {
 
     var text: String? {
         get {
-            return wrappedLabel.text
+            wrappedLabel.text
         }
 
         set {
@@ -293,7 +293,7 @@ class MyViewControllerWithoutLineHeights: UIViewController {
             bodyLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             bodyLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
 
-            borderBottomView.topAnchor.constraint(equalToSystemSpacingBelow: bodyLabel.bottomAnchor, multiplier: 1),
+            borderBottomView.topAnchor.constraint(equalToSystemSpacingBelow: bodyLabel.lastBaselineAnchor, multiplier: 1),
             borderBottomView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             borderBottomView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             borderBottomView.heightAnchor.constraint(equalToConstant: 1)

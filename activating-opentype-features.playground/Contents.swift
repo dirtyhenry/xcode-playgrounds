@@ -51,7 +51,7 @@ extension UIView {
 extension UIImage {
     func saveAs() {
         let destinationURL = FileManager.default.temporaryDirectory.appendingPathComponent("playground-snapshot.png")
-        try! self.pngData()?.write(to: destinationURL)
+        try! pngData()?.write(to: destinationURL)
         print("Written to \(destinationURL.path)")
     }
 }
@@ -70,7 +70,7 @@ private enum FeatureTypeSelectorPair {
     static func attributeValue(for pairDescriptor: PairDescriptor) -> Any {
         [
             UIFontDescriptor.FeatureKey.featureIdentifier: pairDescriptor.0,
-            UIFontDescriptor.FeatureKey.typeIdentifier: pairDescriptor.1,
+            UIFontDescriptor.FeatureKey.typeIdentifier: pairDescriptor.1
         ]
     }
 }
@@ -81,8 +81,8 @@ func createFontWithOptions(fontName: String, size: CGFloat) -> UIFont {
             .featureSettings: [
                 FeatureTypeSelectorPair.attributeValue(
                     for: FeatureTypeSelectorPair.stylisticAlternativesStylisticAltOne
-                ),
-            ],
+                )
+            ]
         ])
 
     // 0.0 means the size from the descriptor will prevail.
@@ -106,12 +106,12 @@ class MyViewController: UIViewController {
         labelWithFeatures.translatesAutoresizingMaskIntoConstraints = false
         labelWithFeatures.font = createFontWithOptions(fontName: "Inter-Bold", size: 32.0)
         labelWithFeatures.text = "0123456789"
-        labelWithFeatures.textColor = .init(hue: 55.0/360.0, saturation: 0.57, brightness: 0.98, alpha: 1.0)
+        labelWithFeatures.textColor = .init(hue: 55.0 / 360.0, saturation: 0.57, brightness: 0.98, alpha: 1.0)
 
         wrapper.translatesAutoresizingMaskIntoConstraints = false
         wrapper.layer.cornerRadius = 8.0
         wrapper.layer.cornerCurve = .continuous
-        wrapper.backgroundColor = .init(hue: 221.0/360.0, saturation: 0.32, brightness: 0.30, alpha: 1.0)
+        wrapper.backgroundColor = .init(hue: 221.0 / 360.0, saturation: 0.32, brightness: 0.30, alpha: 1.0)
 
         view.addSubview(wrapper)
         wrapper.addSubview(label)
@@ -124,7 +124,7 @@ class MyViewController: UIViewController {
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             labelWithFeatures.firstBaselineAnchor.constraint(equalToSystemSpacingBelow: label.lastBaselineAnchor, multiplier: 1.0),
             labelWithFeatures.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+
             wrapper.bottomAnchor.constraint(equalToSystemSpacingBelow: labelWithFeatures.lastBaselineAnchor, multiplier: 1.0),
             label.leadingAnchor.constraint(equalToSystemSpacingAfter: wrapper.leadingAnchor, multiplier: 2.0),
             wrapper.trailingAnchor.constraint(equalToSystemSpacingAfter: label.trailingAnchor, multiplier: 2.0)
@@ -132,7 +132,7 @@ class MyViewController: UIViewController {
 
         self.view = view
     }
-    
+
     override func viewDidLayoutSubviews() {
         wrapper.asImage().saveAs()
     }

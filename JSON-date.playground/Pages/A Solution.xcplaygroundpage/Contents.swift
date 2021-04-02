@@ -37,6 +37,13 @@ class JavaScriptISO8601DateFormatter {
         let container = try decoder.singleValueContainer()
         let dateAsString = try container.decode(String.self)
 
+        // With a Kotlin/Java backend, `DateTimeFormatter` says:
+        //
+        // > If the nano-of-second is zero or not available then the format is complete.
+        //
+        // So we need two different formatters:
+        // * 99,9% of attempts should be decoded with `fractionalSecondsFormatter`
+        // * 00,1% of attempts should fallback to `defaultFormatter`
         for formatter in [fractionalSecondsFormatter, defaultFormatter] {
             if let res = formatter.date(from: dateAsString) {
                 return res
